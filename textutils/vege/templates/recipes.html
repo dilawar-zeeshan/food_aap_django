@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-light bg-dark">
+    <form class="form-inline">
+      <a href="/logout/" class="btn btn-outline-success my-2 my-sm-0" type="submit">LogOut</a>
+    </form>
+  </nav>
+  {{request.user}}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Add a New Recipe</h1>
+        <form  method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="rname">Recipe Name:</label>
+                <input type="text" class="form-control"  name="rname" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="rdesc">Recipe Description:</label>
+                <textarea class="form-control"  name="rdesc" rows="4" required></textarea>
+            </div>
+        
+            <div class="form-group">
+                <label for="rimg">Recipe Image:</label>
+                <input type="file" class="form-control-file" name="rimg" >
+            </div>
+        
+            <button type="submit" class="btn btn-success">Submit Recipe</button>
+        </form>
+            <hr>
+        <div class="mt-5">
+            <div class="mx-auto col-6">
+              <form action="">
+               <div>
+                <label for="rname">Search Food</label>
+                <input type="text"  class="form-control"  name="search">  
+               </div> 
+               <button type="submit" class="btn btn-primary">Search</button>
+              </form>
+            </div>
+          
+        </div>
+
+        <table class="table mt-5">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Recipe Name</th>
+                <th scope="col">Recipe Description</th>
+                <th scope="col">Recipe Image</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for recipe in recipes %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{recipe.rname}}</td>
+                <td>{{recipe.rdesc}}</td>
+                <td>
+                  <img src="/media/{{ recipe.rimg }}" alt="Recipe Image" style="max-width: 100px; max-height: 100px;">
+              </td>
+              <td>
+                <a href="/delete_recipe/{{recipe.id}}" class="button">Delete</a>
+                <a href="/update_recipe/{{recipe.id}}" class="button">Update</a>
+              </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

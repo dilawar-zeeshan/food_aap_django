@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        table, th, td {
+        border:1px solid black;
+        }
+
+    </style>
+</head>
+
+
+{% block st %}
+
+{% endblock %}
+
+<table class="container" widht="full">
+    <tr>
+      <th>S. No</th>
+      <th>Name</th>
+      <th>Age</th>\
+      <th>Voter</th>
+    </tr>
+    {%for peopl in people %}
+    <tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{peopl.name}}</td>
+      <td>{{peopl.age}}</td>
+      <td>{% if peopl.age >= 18 %}
+        yes
+        {% else %}
+        No
+        {%endif%}
+      </td>
+    </tr>
+    {%endfor%}
+    
+  </table>
+
+<footer>
+    <p>&copy; 2024 My Website. All rights reserved.</p>
+</footer>
+</body>
+</html>
